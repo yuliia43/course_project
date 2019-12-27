@@ -1,0 +1,231 @@
+body {
+    /* background-image: url("http://bgfons.com/upload/paper_texture313.jpg");*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position: top;
+    background-color: lightgray;
+    background-size: auto;
+    font-family: 'Bookman Old Style', sans-serif;
+}
+
+.menu {
+    font-family: 'Bookman Old Style', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    font-size: 18px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 0;
+}
+
+ul {
+    background: azure;
+    box-shadow: 0px 1px 1px #bdc3c7;
+    height: 60px;
+    margin: 0 0 0px;
+    width: max-content;
+    display: block;
+}
+
+/* list */
+ul li {
+    display: inline-block;
+    float: left;
+}
+
+/* anchor */
+ul li a {
+    color: darkblue;
+    display: block;
+    text-decoration: none;
+    padding: 19.5px 10px;
+    position: relative;
+}
+
+/* anchor line */
+ul li a:after {
+    background: #203549;
+    content: '';
+    display: inline-block;
+    height: 2px;
+    margin: auto;
+    position: absolute;;
+    bottom: -0px;
+    left: 0;
+    right: 0;
+    transition: all 300ms;
+    width: 0%;
+}
+
+/* active */
+ul li.active a {
+    font-weight: 600;
+}
+
+/* hover */
+ul li a:hover,
+ul li.active a {
+    color: #203549;
+}
+
+/* active border */
+ul li a:hover:after,
+ul li.active a:after {
+    width: 100%;
+}
+
+.box{
+    width: 450px;
+    height: auto;
+    background-color: aliceblue;
+    background-size: 700px;
+    padding: 40px 150px;
+    margin: auto;
+    margin-top: 30px;
+    font-family: 'Bookman Old Style', sans-serif;
+    font-size: 18px;
+}
+
+hr{
+    width: 400px;
+    position: relative;
+}
+
+h3 {
+    font-family: 'Bookman Old Style', serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn {
+    border: none;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    color: darkblue;
+    font-weight: 600;
+    font-size: 15px;
+    background-color: transparent;
+    padding: 10px 50px;
+    margin: auto;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+}
+
+.btn span {
+    position: relative;
+    z-index: 1;
+}
+
+/*.btn:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 490%;
+    width: 140%;
+    background: tan;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    -webkit-transform: translateX(-99%) translateY(-50%) rotate(45deg);
+    transform: translateX(-99%) translateY(-50%) rotate(45deg);
+}*/
+
+.btn:hover:after {
+    -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+    transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+.error {
+    color: firebrick;
+    font-family: "Courier New";
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+.table-fill {
+    text-align: center;
+    font-size: 15px;
+    background: transparent;
+    border-radius:3px;
+    border-collapse: collapse;
+    margin: auto;
+    max-width: 600px;
+    padding: 5px;
+    margin-left: -70px;
+    width: 100%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    animation: float 5s infinite;
+    height: 250px;
+}
+
+.table-fill div {
+    padding: 0px;
+    display: inline-block;
+}
+.table-fill li {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.table-fill li:hover div {
+    background:#4E5066;
+    color:#FFFFFF;
+    border-top: 1px solid #22262e;
+    cursor: pointer;
+}
+.table-fill .header:hover div{
+    font-size: 17px;
+    font-stretch: semi-condensed;
+    cursor: unset;
+    color: black;
+    background: transparent;
+    border-top: none;
+}
+.table-fill li:nth-child(even):hover div {
+    background:#4E5066;
+    color:#FFFFFF;
+    border-top: 1px solid #22262e;
+    cursor: pointer;
+}
+.table-fill li:nth-child(even) div {
+    background: rgba(250, 235, 215, 0.5);
+}
+.table-fill .header {
+    font-size: 17px;
+    font-stretch: semi-condensed;
+    background: rgba(0, 0, 139, 0.5);
+}
+.col {
+    display: flex;
+    padding: 10px 0;
+}
+
+.pagination-btn {
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.transparentButton {
+    margin: 0px;
+    float: unset;
+    background-color: Transparent;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    background-image: none;
+    box-shadow: transparent;
+    text-shadow: transparent;
+    border-radius: 15px;
+}
+
+.transparentButton:hover {
+    background-color: #FFFFFF;
+}
