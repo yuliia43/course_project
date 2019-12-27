@@ -56,15 +56,6 @@ public class UsersService implements UserDetailsService {
         return roles;
     }
 
-    /*@Override
-    public Object getSalt(UserDetails userDetails) {
-        String username = userDetails.getUsername();
-        Optional<User> user = getUserByEmail(username);
-        if (user.isPresent())
-            return user.get().getSalt();
-        return null;
-    }*/
-
     public void add(User user) {
         repository.saveAndFlush(user);
     }

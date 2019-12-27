@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import repair_system.commonlyUsedStrings.PageLocation;
 import repair_system.dtos.UserRegistrationDto;
 import repair_system.encryption.UserEncryptor;
+import repair_system.utils.SecurityEncryptor;
 import repair_system.validators.InputDataValidator;
 import repair_system.validators.MatchingValidator;
 import repair_system.models.User;
@@ -70,7 +71,7 @@ public class RegistrationController {
                 .role(userDto.getRole())
                 .password(userDto.getPassword())
                 .build();
-        UserEncryptor.getUserEncryptor().encrypt(user);
+        SecurityEncryptor.getEncryptor().encrypt(user);
         service.add(user);
         return "redirect:/authorisation";
     }

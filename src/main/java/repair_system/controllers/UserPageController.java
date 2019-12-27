@@ -23,7 +23,7 @@ import java.util.Optional;
 public class UserPageController {
 
     @Autowired
-    private static UserFacade userFacade;
+    private UserFacade userFacade;
 
     @GetMapping("/userPage")
     public String doGet(Model model) {

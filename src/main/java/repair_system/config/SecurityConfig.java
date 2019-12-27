@@ -15,6 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import repair_system.enums.Role;
 import repair_system.factories.RolesFactory;
 import repair_system.services.repositoryServices.UsersService;
+import repair_system.utils.SecurityEncryptor;
 
 /**
  * @author Yuliia Shcherbakova ON 27.12.2019
@@ -66,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder getBcPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+        return SecurityEncryptor.getEncryptor().getEncoder();
     }
 
 

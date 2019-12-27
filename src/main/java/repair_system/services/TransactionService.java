@@ -25,10 +25,6 @@ public class TransactionService {
     @Autowired
     private ApplicationsRepository applicationsRepository;
 
-    /*public void updateAllTransaction(List<Application> applications) {
-
-    }*/
-
     public void takeApplication(List<Feedback> feedbacks) {
         for (Feedback feedback :
                 feedbacks) {
@@ -42,70 +38,6 @@ public class TransactionService {
         feedbacksRepository.flush();
         applicationsRepository.flush();
     }
-
-    /*private boolean commitChanges(Connection connection) {
-        try {
-            connection.commit();
-            logger.info("TakeApplication transaction commited");
-        } catch (SQLException e) {
-            logger.error(ErrorMessage.TRANSACTION_COMMIT_FAIL);
-            setAutoCommit(connection);
-            return false;
-        }
-        return true;
-    }
-
-    private boolean updateApplicationStatus(Connection connection, Application application) {
-        try {
-            applicationsRepository.updateStatus(application, connection);
-        } catch (SQLException e) {
-            logger.error(ErrorMessage.APPLICATION_UPDATING_FAIL);
-            setAutoCommit(connection);
-            return false;
-        }
-        return true;
-    }
-
-    private boolean addFeedback(Connection connection, Feedback feedback) {
-        try {
-            feedbacksRepository.add(feedback, connection);
-        } catch (SQLException e) {
-            logger.error(ErrorMessage.FEEDBACK_ADDING_FAIL);
-            setAutoCommit(connection);
-            return false;
-        }
-        return true;
-    }
-
-    private boolean unsetAutoCommit(Connection connection) {
-        try {
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
-            logger.error(ErrorMessage.AUTO_COMMIT_FALSE_FAIL);
-            closeConnection(connection);
-            return false;
-        }
-        return true;
-    }
-
-    private void closeConnection(Connection connection) {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            logger.error(ErrorMessage.CLOSING_CONNECTION_FAIL);
-        }
-    }
-
-    private void setAutoCommit(Connection connection) {
-        try {
-            connection.rollback();
-            connection.setAutoCommit(true);
-        } catch (SQLException ex) {
-            logger.error(ErrorMessage.ROLLBACK_FAIL);
-        } finally {
-            closeConnection(connection);
-        }
-    }*/
 
     public void updateAllTransaction(List<Application> applications) {
         for (Application application :

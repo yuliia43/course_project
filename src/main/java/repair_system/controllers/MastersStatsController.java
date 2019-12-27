@@ -16,7 +16,7 @@ import java.util.List;
  * @project repair_system
  */
 @Controller
-public class MastersInfoController {
+public class MastersStatsController {
 
     @Autowired
     private ApplicationsService applicationsService;

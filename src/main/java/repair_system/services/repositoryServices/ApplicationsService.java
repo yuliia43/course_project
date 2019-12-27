@@ -32,7 +32,6 @@ public class ApplicationsService {
     @Autowired
     private TransactionService transactionService;
 
-    private static Logger logger = Logger.getLogger(ApplicationsService.class);
 
 
     public List<Application> getAllByUserId(int userId) {
@@ -55,13 +54,9 @@ public class ApplicationsService {
     }
 
     public void setFeedback(Application application) {
-        try {
             Feedback feedback = feedbackService
                     .getAllByApplicationId(application.getApplicationId());
             application.setFeedback(feedback);
-        } catch (SQLException e) {
-            logger.error(ErrorMessage.SQL_EXCEPTION);
-        }
     }
 
     public List<Application> getAllNotViewed() {

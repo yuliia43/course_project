@@ -33,23 +33,6 @@ public class UserFacade {
         return secureUser;
     }
 
-    public SecureUser checkAuthorizationInfo(String email, String password) throws SQLException {
-        Optional<User> user = usersService.getUserByEmail(email);
-        if(!user.isPresent()) return null;
-        else {
-            boolean authorised = UserEncryptor
-                    .getUserEncryptor().checkIfDecryptedEqualEncrypted(user.get(), password);
-            if (!authorised)
-                return null;
-            return getSecureUserDto(user.get());
-        }
-    }
-
-    public SecureUser getOneById(int id) throws SQLException {
-        User user = usersService.getOneById(id);
-        return getSecureUserDto(user);
-    }
-
     public SecureUser getUserByEmail(String email) {
         Optional<User> user = usersService.getUserByEmail(email);
         return getSecureUserDto(user.get());

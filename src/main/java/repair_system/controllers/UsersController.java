@@ -13,14 +13,17 @@ import repair_system.commonlyUsedStrings.PageLocation;
 import repair_system.dtos.FeedbackDto;
 import repair_system.dtos.SecureUser;
 import repair_system.enums.Role;
+import repair_system.enums.Status;
 import repair_system.facade.UserFacade;
 import repair_system.factories.RolesFactory;
+import repair_system.factories.StatusFactory;
 import repair_system.models.Application;
 import repair_system.models.Feedback;
 import repair_system.models.User;
 import repair_system.services.repositoryServices.ApplicationsService;
 import repair_system.services.repositoryServices.FeedbacksService;
 import repair_system.services.repositoryServices.UsersService;
+import repair_system.validators.InputDataValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,17 +35,19 @@ import java.util.Optional;
  * @project repair_system
  */
 @Controller
-public class UsersApplicationController {
+public class UsersController {
 
     @Autowired
-    private static UserFacade userFacade;
+    private UserFacade userFacade;
     @Autowired
     private ApplicationsService applicationsService;
     @Autowired
     private FeedbacksService feedbacksService;
+    @Autowired
+    private UsersService usersService;
 
     @GetMapping("/user/applications")
-    public String doGet(Model model) {
+    public String usersApplicationDoGet(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SecureUser user = userFacade.getUserByEmail(authentication.getName());
         model.addAttribute("applications",
@@ -51,10 +56,33 @@ public class UsersApplicationController {
     }
 
     @PostMapping("/user/applications")
-    public String doPost(FeedbackDto feedbackDto, Model model) {
+    public String usersApplicationDoPost(FeedbackDto feedbackDto, Model model) {
         Feedback feedback = feedbacksService.getFeedbackById(feedbackDto.getFeedbackId());
         feedback.setFeedback(feedbackDto.getFeedback());
         feedbacksService.setFeedback(feedback);
-        return doGet(model);
+        return usersApplicationDoGet(model);
+    }
+
+    @GetMapping("/user/newApplication")
+    public String usersNewApplicationDoGet(Model model) {
+        return PageLocation.NEW_APPLICATION_PAGE;
+    }
+
+    @PostMapping("/user/newApplication")
+    public String usersNewApplicationDoPost(String details, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> user = usersService.getUserByEmail(authentication.getName());
+        if (InputDataValidator.detailsDataNotEmpty(details)) {
+            applicationsService.add(new Application()
+                    .builder()
+                    .userId(user.get().getUserId())
+                    .repairDetails(details)
+                    .status(StatusFactory.getStringValue(Status.CREATED))
+                    .build());
+            return "redirect:/user/applications";
+        } else {
+            model.addAttribute("emptyFields", true);
+            return usersNewApplicationDoGet(model);
+        }
     }
 }

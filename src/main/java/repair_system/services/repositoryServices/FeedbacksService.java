@@ -21,7 +21,6 @@ public class FeedbacksService {
     private FeedbacksRepository repository;
     @Autowired
     private UsersService usersService;
-    private static Logger logger = Logger.getLogger(FeedbacksService.class);
 
     public List<Feedback> getAll() throws SQLException {
         List<Feedback> feedbacks = repository.findAll();
@@ -29,7 +28,7 @@ public class FeedbacksService {
         return feedbacks;
     }
 
-    public Feedback getAllByApplicationId(int applicationId) throws SQLException {
+    public Feedback getAllByApplicationId(int applicationId) {
         Feedback feedbacks = repository.getOneByApplicationId(applicationId);
         setMaster(feedbacks);
         return feedbacks;

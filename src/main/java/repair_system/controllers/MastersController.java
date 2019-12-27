@@ -24,7 +24,7 @@ import java.util.List;
  * @project repair_system
  */
 @Controller
-public class MasterNewApplicationController {
+public class MastersController {
     @Autowired
     private ApplicationsService applicationsService;
     @Autowired
@@ -33,18 +33,18 @@ public class MasterNewApplicationController {
     private TransactionService transactionService;
 
     @GetMapping("master/newApplication")
-    public String doGet(Model model) {
+    public String masterNewApplicationDoGet(Model model) {
         List<Application> applications = applicationsService.getAllAccepted();
         model.addAttribute("applications", applications);
         return PageLocation.MASTERS_APPLICATION_PAGE;
     }
 
     @PostMapping("master/newApplication")
-    public String doPost(String[] applicationId, Model model) {
+    public String masterNewApplicationDoPost(String[] applicationId, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!InputDataValidator.somethingIsChosen(applicationId)) {
             model.addAttribute("notChecked", true);
-            return doGet(model);
+            return masterNewApplicationDoGet(model);
         } else {
             List<Feedback> feedbacks = new ArrayList<>();
             for (String id : applicationId) {
@@ -54,7 +54,27 @@ public class MasterNewApplicationController {
                         .build());
             }
                 transactionService.takeApplication(feedbacks);
-            return doGet(model);
+            return masterNewApplicationDoGet(model);
         }
+    }
+
+    @GetMapping("/master/applications")
+    public String masterApplicationDoGet(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<Application> applications = applicationsService
+                .getAllUnfinishedForMasterEmail(authentication.getName());
+        model.addAttribute("applications", applications);
+        return PageLocation.MASTERS_FINISHING_PAGE;
+    }
+
+    @PostMapping("/master/applications")
+    public String masterApplicationDoPost(String[] applicationId, Model model) {
+        if (!InputDataValidator.somethingIsChosen(applicationId)) {
+            model.addAttribute("notChecked", true);
+            return masterApplicationDoGet(model);
+        } else {
+            applicationsService.updateAll(applicationId);
+        }
+        return masterApplicationDoGet(model);
     }
 }

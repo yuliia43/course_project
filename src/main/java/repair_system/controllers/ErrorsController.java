@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @project spring_app
  */
 @Controller
-public class MyErrorController implements ErrorController {
+public class ErrorsController implements ErrorController {
  
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public ModelAndView renderErrorPage(HttpServletRequest httpRequest) {

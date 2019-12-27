@@ -25,5 +25,4 @@ public class User {
     private String role;
     private String email;
     private String password;
-    /*private String salt;*/
 }
